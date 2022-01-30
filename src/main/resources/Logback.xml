@@ -16,7 +16,7 @@
     <!-- === 	one logger can use several appenders for different log priorities 	 === -->
     <!-- ===	Appenders can also use email or other notifications 				 === -->
     <!-- ===    Appenders can log to CONSOLE,
-                to simple file appenders like CRAWLERINFO
+                to simple file appenders like SIMPLEFILE
                 to RollingFileAppenders which change the current file and roll over to a new one
                 and to email, etc.													===	-->
 
