@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration debug="true" scan="true" scanPeriod="30 seconds" >
+
+<!--            === LOG LOCATIONS === -->
+    <property name="LOGS" value="./logs"/>
+
+    <property name="INFO" value="${LOGS}/info"/>
+    <property name="INFOARCHIVE" value="${INFO}/archive"/>
+
+    <property name="DEBUG" value="${LOGS}/debug"/>
+    <property name="DEBUGARCHIVE" value="${DEBUG}/archive"/>
+
+
+<!--            === LOG APPENDERS === -->
+    <!-- === 	Appenders output the information that is gathered by a logger		 === -->
+    <!-- === 	one logger can use several appenders for different log priorities 	 === -->
+    <!-- ===	Appenders can also use email or other notifications 				 === -->
+    <!-- ===    Appenders can log to CONSOLE,
+                to simple file appenders like CRAWLERINFO
+                to RollingFileAppenders which change the current file and roll over to a new one
+                and to email, etc.													===	-->
+
+    <!-- === 	CONSOLE APPENDER 													=== -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{16} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <!-- === 	SIMPLE FILE APPENDER 													=== -->
+         <appender name="SIMPLEFILE" class="ch.qos.logback.core.FileAppender">
+       		  <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+       		      <level>INFO</level>
+       		  </filter>
+             <file>${LOGS}/simple-file.log</file>
+             <append>true</append>
+             <encoder>
+                 <pattern>%d{yyyy-MM-dd HH:mm} %-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+             </encoder>
+         </appender>
+
+
+<!--           === ROLLING FILE APPENDER === 													    -->
+    <appender name="ROLLINGFILEINFO"
+              class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!--  Filter LOGLEVEL -->
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <file>${INFO}/current_info.log</file>
+        <encoder
+                class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+            <Pattern>%X{name} %d %p %C{1.} [%t] %m%n</Pattern>
+        </encoder>
+
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>${INFOARCHIVE}/archived_info-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+
+            <!-- each archived file, size max 10MB -->
+            <!--     === ACHTUNG: die max File Size kann deutlich überschritten werden, wenn die Logs ohne Unterbrechung Einträge produzieren === -->
+            <maxFileSize>5MB</maxFileSize>
+
+            <!-- total size of all archive files, if total size > 1GB, it will delete old archived file -->
+            <totalSizeCap>50MB</totalSizeCap>
+            <!-- 60 days to keep -->
+            <maxHistory>50</maxHistory>
+        </rollingPolicy>
+    </appender>
+
+
+
+    <!-- 	=== ROOT LOGGER vs PACKAGE LOGGER ===	 								         === -->
+
+
+    <root level="INFO">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="SIMPLEFILE" />
+        <appender-ref ref="ROLLINGFILEINFO" />
+    </root>
+
+
+    <!--    === declare ROOT LOGGER as Standard Logger for the whole project 				=== -->
+    <!--    <root level="DEBUG">-->
+    <!--        &lt;!&ndash;  		<appender-ref ref="CONSOLE" /> &ndash;&gt;-->
+    <!--        <appender-ref ref="ROLLINGFILEDEBUG"/>-->
+    <!--        <appender-ref ref="ROLLINGFILEINFOS"/>-->
+    <!--    </root>-->
+
+
+    <!--    ===   declare PACKAGE LOGGER  for special packages within the project				=== -->
+    <!--     <logger name="LoggerSpecialPackage" level="INFO" additivity="true"> -->
+    <!--  		<appender-ref ref="CONSOLE" /> -->
+    <!--      	<appender-ref ref="CRAWLERINFO" /> -->
+    <!--       	<appender-ref ref="CRAWLERWARNING" /> -->
+    <!--       	<appender-ref ref="ROLLINGFILE" /> -->
+    <!--       </logger> -->
+
+
+
+<!--        === SHORTENING PACKAGE NAMES ===-->
+<!--    Conversion      specifier 	Logger name 	Result-->
+<!--    %logger 	    mainPackage.sub.sample.Bar 	mainPackage.sub.sample.Bar-->
+<!--    %logger{0}  	mainPackage.sub.sample.Bar 	Bar-->
+<!--    %logger{5} 	    mainPackage.sub.sample.Bar 	m.s.s.Bar-->
+<!--    %logger{10} 	mainPackage.sub.sample.Bar 	m.s.s.Bar-->
+<!--    %logger{15} 	mainPackage.sub.sample.Bar 	m.s.sample.Bar-->
+<!--    %logger{16} 	mainPackage.sub.sample.Bar 	m.sub.sample.Bar-->
+<!--    %logger{26} 	mainPackage.sub.sample.Bar 	mainPackage.sub.sample.Bar-->
+
+</configuration>
