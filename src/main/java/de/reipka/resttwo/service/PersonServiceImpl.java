@@ -1,6 +1,5 @@
 package de.reipka.resttwo.service;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
@@ -39,9 +38,6 @@ public class PersonServiceImpl implements PersonService {
         if(validatorService.isValidInputJson(person)) {
 
             Person createdPerson = new Person();
-            personRepository.save(createdPerson);
-
-            createdPerson.getId();
 
             if (null != person.getFirstName()) {
                 createdPerson.setFirstName(person.getFirstName());
@@ -49,6 +45,8 @@ public class PersonServiceImpl implements PersonService {
             createdPerson.setLastName(person.getLastName());
             createdPerson.setBirthdate(person.getBirthdate());
 
+            personRepository.save(createdPerson);
+            createdPerson.getId();
             personRepository.save(createdPerson);
 
             String savedPerson = createdPerson.getId() + ", " + createdPerson.getFirstName() + ", " + createdPerson.getLastName() + ", " + createdPerson.getBirthdate();

@@ -5,7 +5,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
+import java.util.Set;
 
 @Service
 public class ValidatorServiceImpl implements ValidatorService{
@@ -14,11 +18,20 @@ public class ValidatorServiceImpl implements ValidatorService{
 
     public boolean isValidInputJson(Person person){
 
-        if (null != person.getLastName() && null !=  person.getBirthdate()) {
-            logger.info("Birthdate and LastName passed");
+
+
+        // validate the input
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        Validator validator = factory.getValidator();
+        Set<ConstraintViolation<Person>> violations = validator.validate(person);
+        logger.info("Number of Violations: " + violations.size());
+        if(violations.size() == 0){
+            logger.info("Validation passed.");
             return true;
         }
-        logger.info("Birthdate and Lastname are required.");
+
+        //violations.forEach(System.out::println);
+        logger.info(violations.toString());
         return false;
     }
 

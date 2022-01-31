@@ -1,7 +1,6 @@
 package de.reipka.resttwo.service;
 
 import de.reipka.resttwo.domain.Person;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
