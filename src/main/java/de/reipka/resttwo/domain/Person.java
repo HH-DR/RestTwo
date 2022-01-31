@@ -1,9 +1,8 @@
 package de.reipka.resttwo.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.lang.NonNull;
+import org.springframework.validation.annotation.Validated;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,6 +21,8 @@ public class Person {
     private Long id;
 
     private String firstName;
+    @NonNull
     private String lastName;
+    @NonNull
     private LocalDate birthdate;
 }

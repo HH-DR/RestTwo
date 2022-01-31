@@ -1,6 +1,8 @@
 package de.reipka.resttwo.service;
 
 import de.reipka.resttwo.domain.Person;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,5 +11,5 @@ import java.util.List;
 public interface PersonService {
 
     List<Person> findAllPersons();
-    String createPerson(String json);
+    ResponseEntity<Person> createPerson(Person person);
 }

@@ -1,8 +1,9 @@
 package de.reipka.resttwo.service;
 
+import de.reipka.resttwo.domain.Person;
+
 public interface ValidatorService {
 
-    static boolean isValidJson(String json){ return true;}
-
+    public boolean isValidInputJson(Person person);
 
 }
