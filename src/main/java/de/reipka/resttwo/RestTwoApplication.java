@@ -9,6 +9,8 @@ public class RestTwoApplication {
 
     public static void main(String[] args) {
         SpringApplication.run(RestTwoApplication.class, args);
+
+
     }
 
 
