@@ -8,6 +8,7 @@ import lombok.AllArgsConstructor;
 import lombok.SneakyThrows;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.context.MessageSource;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @AllArgsConstructor
@@ -24,6 +26,8 @@ public class PersonController {
     private final PersonService personService;
 
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
+    private MessageSource messageSource;
 
 
     @GetMapping(path = "person/get/all")
@@ -42,8 +46,11 @@ public class PersonController {
                 )
     @ResponseBody
     @ApiOperation(value = "Creates a new Person and saves it to DB.")
-    //@SneakyThrows
     public ResponseEntity<Person> createPersonFromJson(@ApiParam(value = "lastName and birthDate are required") @RequestBody Person person) {
+
+        logger.info(
+                messageSource.getMessage("simpleMessage", new Object[0], Locale.getDefault())
+        );
 
         return personService.createPerson(person);
 
