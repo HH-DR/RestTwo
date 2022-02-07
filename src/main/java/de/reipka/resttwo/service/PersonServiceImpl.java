@@ -35,7 +35,7 @@ public class PersonServiceImpl implements PersonService {
     @Override
     public ResponseEntity<Person> createPerson(Person person) {
 
-        if(validatorService.isValidInputJson(person)) {
+        if(validatorService.isValidInput(person)) {
 
             Person createdPerson = new Person();
 

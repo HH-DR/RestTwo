@@ -35,6 +35,7 @@ public class PersonController {
     public ResponseEntity<List<Person>> createPersonWithoutJson(){
 
         logger.info("List of all Persons requested.");
+        //System.out.println("List of all Persons requested.");
 
         return new ResponseEntity<List<Person>>(personService.findAllPersons(), HttpStatus.OK);
     }

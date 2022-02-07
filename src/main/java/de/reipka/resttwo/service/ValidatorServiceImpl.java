@@ -1,8 +1,10 @@
 package de.reipka.resttwo.service;
 
 import de.reipka.resttwo.domain.Person;
+import de.reipka.resttwo.repository.PersonRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
+import org.hibernate.criterion.Example;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.MessageSource;
@@ -24,7 +26,9 @@ class ValidatorServiceImpl implements ValidatorService{
 
     private MessageSource messageSource;
 
-    public boolean isValidInputJson(Person person){
+    private final PersonRepository personRepository;
+
+    public boolean isValidInput(Person person){
         // validate the input
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -47,6 +51,20 @@ class ValidatorServiceImpl implements ValidatorService{
         );
 
 
+        return false;
+    }
+
+
+    @Override
+    public boolean personExistsInDB(Person person) {
+
+        Person testPerson = new Person();
+        testPerson.setBirthdate(person.getBirthdate());
+        testPerson.setLastName(person.getLastName());
+
+        Example example =  Example.create(testPerson);
+
+       // personRepository.exists(Example.of(example));
         return false;
     }
 

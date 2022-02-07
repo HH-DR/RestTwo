@@ -5,7 +5,8 @@ import de.reipka.resttwo.domain.Person;
 
 public interface ValidatorService {
 
-    boolean isValidInputJson(Person person);
+    boolean isValidInput(Person person);
+    boolean personExistsInDB(Person person);
 
 }
 

@@ -20,17 +20,17 @@ public class HomeController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
-    @GetMapping({"/", "", "home", "index"})
+    @GetMapping({"test"})
     public @ResponseBody
     ResponseEntity<List<String>> sayHello() {
 
         List<String> list = new ArrayList<>();
-        list.add("Moin");
-        list.add("Moin");
+        list.add("test");
+        list.add("test");
         String msg = "Welcome from {}";
-        String path = "home";
-        logger.info(msg, path);
-
+        String path = "test";
+       // logger.info(msg, path);
+        System.out.println("Welcome from" + path.toString());
         return new ResponseEntity<List<String>>(list, HttpStatus.OK);
     }
 
