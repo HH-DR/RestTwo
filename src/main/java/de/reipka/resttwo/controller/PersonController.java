@@ -32,7 +32,7 @@ public class PersonController {
 
     @GetMapping(path = "person/get/all")
     @ApiOperation(value = "Get a list of all persons existing in the DB.")
-    public ResponseEntity<List<Person>> createPersonWithoutJson(){
+    public ResponseEntity<List<Person>> getAllPersons(){
 
         logger.info("List of all Persons requested.");
         //System.out.println("List of all Persons requested.");
@@ -47,7 +47,7 @@ public class PersonController {
                 )
     @ResponseBody
     @ApiOperation(value = "Creates a new Person and saves it to DB.")
-    public ResponseEntity<Person> createPersonFromJson(@ApiParam(value = "lastName and birthDate are required") @RequestBody Person person) {
+    public ResponseEntity<Person> createPerson(@ApiParam(value = "lastName and birthDate are required") @RequestBody Person person) {
 
         logger.info(
                 messageSource.getMessage("simpleMessage", new Object[0], Locale.getDefault())

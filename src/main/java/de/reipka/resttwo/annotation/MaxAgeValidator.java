@@ -1,4 +1,4 @@
-package de.reipka.resttwo.Annotation;
+package de.reipka.resttwo.annotation;
 
 import javax.validation.ConstraintValidator;
 import javax.validation.ConstraintValidatorContext;

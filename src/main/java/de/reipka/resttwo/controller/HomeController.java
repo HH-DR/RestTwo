@@ -29,8 +29,8 @@ public class HomeController {
         list.add("test");
         String msg = "Welcome from {}";
         String path = "test";
-       // logger.info(msg, path);
-        System.out.println("Welcome from" + path.toString());
+        logger.info(msg, path);
+        //System.out.println("Welcome from" + path.toString());
         return new ResponseEntity<List<String>>(list, HttpStatus.OK);
     }
 

@@ -1,13 +1,8 @@
 package de.reipka.resttwo.domain;
 
-import de.reipka.resttwo.Annotation.MinAge;
-import de.reipka.resttwo.Annotation.MaxAge;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import org.springframework.context.MessageSource;
-import org.springframework.context.support.ReloadableResourceBundleMessageSource;
+import de.reipka.resttwo.annotation.MaxAge;
+import de.reipka.resttwo.annotation.MinAge;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -20,6 +15,7 @@ import java.time.LocalDate;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 @Entity
 public class Person {
 
