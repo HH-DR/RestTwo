@@ -1,9 +1,6 @@
 package de.reipka.resttwo.domain;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,13 +9,17 @@ import javax.persistence.Id;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Entity
-public class Password {
+public class User {
 
     @Id
     @GeneratedValue
     private Long id;
 
-    private String password;
+    String userName;
+    String password;
+
 
 }
